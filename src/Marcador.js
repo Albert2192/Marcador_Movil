@@ -24,8 +24,8 @@ export default function Marcador() {
         return <View />;
     }
 
+    /* SOLICITA PERMISOS PARA USAR LA CÁMARA */
     if (!permission.granted) {
-        // Camera permissions are not granted yet.
         return (
             <View style={[styles.container, { justifyContent: "center", alignItems: "center", }]}>
                 <FontAwesome name="camera" size={30} color="black" />
@@ -46,8 +46,8 @@ export default function Marcador() {
             /* const photo = await cameraRef.current.takePictureAsync(); */
             const photo = await cameraRef.current.takePictureAsync({ base64: true });
             /* console.log(photo); */
-            uploadImage(photo);
             // Aquí puedes agregar el manejo de la imagen capturada
+            uploadImage(photo);
         }
     }
 
@@ -102,13 +102,11 @@ export default function Marcador() {
 
     return (
         <View style={styles.container}>
-
             <ImageBackground
                 /* source={{ uri: 'https://static.vecteezy.com/system/resources/previews/013/614/661/non_2x/abstract-computer-technology-background-with-circuit-board-and-circle-tech-illustration-vector.jpg' }} */
                 source={{ uri: 'https://static.vecteezy.com/system/resources/previews/017/446/297/non_2x/modern-technology-circuit-board-texture-background-futuristic-blue-circuit-board-background-quantum-computer-technology-illustration-vector.jpg' }}
                 style={styles.backgroundImage}
             >
-
                 <View style={styles.section1}>
                     <Camera
                         style={styles.camera}
