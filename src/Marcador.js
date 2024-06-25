@@ -1,5 +1,5 @@
 import { Camera } from 'expo-camera/legacy';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View, ImageBackground, TextInput } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -16,6 +16,8 @@ export default function Marcador() {
     const cameraRef = useRef(null);
     const inputRef = useRef(null);
     const [inputValue, setInputValue] = useState('');
+
+    const [tiempoReset, setTiempoReset] = useState(15000);
 
     if (!permission) {
         // Camera permissions are still loading.
@@ -67,16 +69,14 @@ export default function Marcador() {
             name: 'photo.jpg',
             type: 'image/jpeg'
         });
-
         try {
-            const response = await fetch( URL_SERVER, {
+            const response = await fetch(URL_SERVER, {
                 method: 'POST',
                 body: formData,
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-
             const result = await response.json();
             console.log('Upload success:', result);
             volverInicio();
@@ -85,10 +85,17 @@ export default function Marcador() {
         }
     }
 
-    setTimeout(() => {
-        volverInicio();
-    }, 15000);
+    useEffect(()=>{
+        Inactivo();
+    }, [])
 
+    const Inactivo = () => {
+        setTimeout(() => {
+            volverInicio();
+        }, tiempoReset);
+    }
+
+    /* FUNCION PARA VOLVER A PAGINA PRINCIPAL */
     const volverInicio = () => {
         navigation.navigate('Inicio');
     }
@@ -103,7 +110,6 @@ export default function Marcador() {
             >
 
                 <View style={styles.section1}>
-                    {/* <Text style={{fontSize: 20, color: "#f3f3f3", fontWeight: "bold", backgroundColor: "#154360", paddingHorizontal: 20, paddingVertical: 3, borderRadius: 3,}}>Control de Acceso.</Text> */}
                     <Camera
                         style={styles.camera}
                         type={facing}
@@ -168,10 +174,7 @@ export default function Marcador() {
                         </View>
                     </View>
                 </View>
-
-
             </ImageBackground>
-
         </View>
     );
 }

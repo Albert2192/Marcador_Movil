@@ -6,13 +6,12 @@ import { useNavigation } from '@react-navigation/native'
 
 const RealTimeClock = () => {
     const navigation = useNavigation();
-    
+
     const [time, setTime] = useState(new Date());
     useEffect(() => {
         const intervalId = setInterval(() => {
             setTime(new Date());
         }, 1000);
-
         // Limpia el intervalo cuando el componente se desmonta
         return () => clearInterval(intervalId);
     }, []);
@@ -23,11 +22,11 @@ const RealTimeClock = () => {
                 colors={['#2B32B2', '#1488CC']}
                 style={styles.background}
             >
-                <Text style={{color: "#fff", marginBottom: 10,}}>Bienvenido!</Text>
+                <Text style={{ color: "#fff", marginBottom: 10, }}>Bienvenido!</Text>
                 <Text style={styles.timeText}>
                     {time.toLocaleTimeString()}
                 </Text>
-                <TouchableOpacity style={styles.Buttom}  onPress={() => { navigation.navigate('Marcador') }}>
+                <TouchableOpacity style={styles.Buttom} onPress={() => { navigation.navigate('Marcador') }}>
                     <Entypo name="fingerprint" size={24} color="black" />
                     <Text>Marcar</Text>
                 </TouchableOpacity>
@@ -36,12 +35,17 @@ const RealTimeClock = () => {
     );
 };
 
+export default function Inicio() {
+    return (
+        <RealTimeClock />
+    );
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        /* backgroundColor: '#f5fcff', */
     },
     background: {
         flex: 1,
@@ -67,9 +71,3 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     }
 });
-
-export default function Inicio() {
-    return (
-        <RealTimeClock />
-    );
-}
