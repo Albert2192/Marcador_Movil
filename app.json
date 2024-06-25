@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "marcador",
+    "slug": "marcador",
+    "version": "1.0.0",
+    "orientation": "landscape",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to take photos"
+      }
+    },
+    "android": {
+      "package": "com.alberto.marcador",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [ "INTERNET", "CAMERA", "WRITE_EXTERNAL_STORAGE" ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
